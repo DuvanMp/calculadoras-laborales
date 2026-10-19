@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="es-CO">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Calculadora de prima de servicios 2026 Colombia | Junio y diciembre</title>
+  <meta name="description" content="Calcula tu prima de junio o diciembre 2026 según los días trabajados. Incluye auxilio de transporte. Fechas de pago y fórmula explicada." />
+  <link rel="icon" href="/favicon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <!--HEADER-->
+  <main>
+    <section class="hero">
+      <div class="wrap">
+        <span class="pill">Prima de junio y diciembre</span>
+        <h1>Calculadora de prima de servicios</h1>
+        <p>Calcula cuánto te deben pagar de prima según tu salario y los días que trabajaste en el semestre.</p>
+      </div>
+    </section>
+
+    <div class="wrap">
+      <div class="tool">
+        <form onsubmit="return false">
+          <label class="field">Salario básico mensual
+            <input id="salario" inputmode="numeric" autocomplete="off" />
+          </label>
+          <label class="field">Semestre
+            <select id="semestre">
+              <option value="1">Primer semestre (enero a junio) · se paga en junio</option>
+              <option value="2">Segundo semestre (julio a diciembre) · se paga en diciembre</option>
+            </select>
+          </label>
+          <div class="row">
+            <label class="field">Desde
+              <input id="desde" type="date" />
+            </label>
+            <label class="field">Hasta
+              <input id="hasta" type="date" />
+            </label>
+          </div>
+          <p class="note">Si trabajaste todo el semestre, deja las fechas como están. Si entraste o saliste en la mitad, cámbialas.</p>
+        </form>
+        <div class="result" aria-live="polite">
+          <span class="big-label">Tu prima</span>
+          <span class="big" id="valor">$0</span>
+          <dl class="lines">
+            <div><dt>Salario + auxilio</dt><dd id="r-base">$0</dd></div>
+            <div><dt>Días trabajados</dt><dd id="r-dias">0</dd></div>
+          </dl>
+          <p class="note" id="r-pago"></p>
+          <button class="share" id="share" type="button">Compartir resultado</button>
+        </div>
+      </div>
+
+      <article class="content narrow">
+        <section>
+          <h2>¿Cómo se calcula la prima?</h2>
+          <p>La prima de servicios equivale a 30 días de salario por año, pagados en dos partes: 15 días en junio y 15 días en diciembre. Si trabajaste menos tiempo, se paga en proporción a los días trabajados.</p>
+          <p class="formula">Prima = (salario + auxilio de transporte) × días trabajados ÷ 360</p>
+        </section>
+        <section>
+          <h2>¿Cuándo se paga la prima en 2026?</h2>
+          <ul>
+            <li><strong>Primera prima:</strong> a más tardar el 30 de junio.</li>
+            <li><strong>Segunda prima:</strong> a más tardar el 20 de diciembre.</li>
+          </ul>
+        </section>
+        <section>
+          <h2>Preguntas frecuentes</h2>
+          <details><summary>¿El auxilio de transporte cuenta para la prima?</summary><p>Sí. Para quienes ganan hasta dos salarios mínimos, el auxilio de transporte se suma al salario para calcular la prima.</p></details>
+          <details><summary>¿Si renuncio me pagan la prima?</summary><p>Sí. Te deben pagar la prima proporcional a los días trabajados en el semestre, dentro de tu liquidación.</p></details>
+          <details><summary>¿Los empleados de servicio doméstico tienen prima?</summary><p>Sí. Desde 2016 las trabajadoras y trabajadores del servicio doméstico tienen derecho a prima de servicios.</p></details>
+        </section>
+      </article>
+    </div>
+  </main>
+  <!--FOOTER-->
+  <script type="module" src="/src/prima.js"></script>
+</body>
+</html>

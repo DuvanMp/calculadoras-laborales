@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="es-CO">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Calculadora de salario neto 2026 Colombia | ¿Cuánto recibo?</title>
+  <meta name="description" content="Calcula cuánto recibes de sueldo en 2026 después de salud y pensión. Incluye auxilio de transporte y fondo de solidaridad. Salario mínimo 2026: $1.750.905." />
+  <link rel="icon" href="/favicon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <!--HEADER-->
+  <main>
+    <section class="hero">
+      <div class="wrap">
+        <span class="pill">Actualizada 2026</span>
+        <h1>Calculadora de salario neto en Colombia</h1>
+        <p>Escribe tu salario y mira cuánto te llega realmente al mes, después de descontar salud y pensión.</p>
+      </div>
+    </section>
+
+    <div class="wrap">
+      <div class="tool">
+        <form id="form" onsubmit="return false">
+          <label class="field">Salario básico mensual
+            <input id="salario" inputmode="numeric" autocomplete="off" placeholder="1.750.905" />
+            <small>Sin auxilio de transporte ni horas extra.</small>
+          </label>
+          <div class="quick" aria-label="Valores rápidos">
+            <button type="button" data-v="1">1 mínimo</button>
+            <button type="button" data-v="1.5">1,5 mínimos</button>
+            <button type="button" data-v="2">2 mínimos</button>
+            <button type="button" data-v="3">3 mínimos</button>
+            <button type="button" data-v="5">5 mínimos</button>
+          </div>
+        </form>
+        <div class="result" aria-live="polite">
+          <span class="big-label">Recibes al mes</span>
+          <span class="big" id="neto">$0</span>
+          <dl class="lines">
+            <div><dt>Salario básico</dt><dd id="r-salario">$0</dd></div>
+            <div><dt>Auxilio de transporte</dt><dd id="r-aux">$0</dd></div>
+            <div class="minus"><dt>Salud (4 %)</dt><dd id="r-salud">$0</dd></div>
+            <div class="minus"><dt>Pensión (4 %)</dt><dd id="r-pension">$0</dd></div>
+            <div class="minus"><dt>Fondo de solidaridad</dt><dd id="r-fsp">$0</dd></div>
+          </dl>
+          <p class="note">Quincena aproximada: <strong id="r-quincena">$0</strong>. No incluye retención en la fuente, que aplica a salarios altos.</p>
+          <button class="share" id="share" type="button">Compartir resultado</button>
+        </div>
+      </div>
+
+      <article class="content narrow">
+        <section>
+          <h2>¿Cómo se calcula el salario neto?</h2>
+          <p>Del salario básico, el empleado aporta el 4 % para salud y el 4 % para pensión. Si ganas hasta dos salarios mínimos, además recibes el auxilio de transporte, que no tiene descuentos.</p>
+          <p class="formula">Salario neto = salario + auxilio de transporte − 4 % salud − 4 % pensión − fondo de solidaridad</p>
+        </section>
+        <section>
+          <h2>Salario mínimo 2026 en Colombia</h2>
+          <ul>
+            <li><strong>Salario mínimo:</strong> $1.750.905 (Decreto 1469 de 2025).</li>
+            <li><strong>Auxilio de transporte:</strong> $249.095 (Decreto 1470 de 2025).</li>
+            <li><strong>Total con auxilio:</strong> $2.000.000 antes de descuentos.</li>
+          </ul>
+        </section>
+        <section>
+          <h2>Preguntas frecuentes</h2>
+          <details><summary>¿Quién recibe auxilio de transporte?</summary><p>Los trabajadores que ganan hasta dos salarios mínimos ($3.501.810 en 2026). No se le descuenta salud ni pensión.</p></details>
+          <details><summary>¿Qué es el fondo de solidaridad pensional?</summary><p>Un aporte adicional para quienes ganan 4 salarios mínimos o más. Empieza en 1 % y sube hasta 2 % para salarios de 20 mínimos o más.</p></details>
+          <details><summary>¿Por qué me llega menos de lo que muestra la calculadora?</summary><p>Puede haber otros descuentos: retención en la fuente, libranzas, aportes voluntarios, cooperativa o ausencias. Revisa tu desprendible de pago.</p></details>
+        </section>
+      </article>
+    </div>
+  </main>
+  <!--FOOTER-->
+  <script type="module" src="/src/salario-neto.js"></script>
+</body>
+</html>

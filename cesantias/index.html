@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="es-CO">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Calculadora de cesantías e intereses 2026 Colombia</title>
+  <meta name="description" content="Calcula tus cesantías y los intereses sobre cesantías (12 %) según tu salario y días trabajados. Fechas de pago y consignación explicadas." />
+  <link rel="icon" href="/favicon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <!--HEADER-->
+  <main>
+    <section class="hero">
+      <div class="wrap">
+        <span class="pill">Cesantías + intereses del 12 %</span>
+        <h1>Calculadora de cesantías e intereses</h1>
+        <p>Calcula cuánto te deben consignar de cesantías y cuánto te deben pagar de intereses por el tiempo trabajado.</p>
+      </div>
+    </section>
+
+    <div class="wrap">
+      <div class="tool">
+        <form onsubmit="return false">
+          <label class="field">Salario básico mensual
+            <input id="salario" inputmode="numeric" autocomplete="off" />
+            <small>Si tu salario es variable, usa el promedio del último año.</small>
+          </label>
+          <div class="row">
+            <label class="field">Desde
+              <input id="desde" type="date" />
+            </label>
+            <label class="field">Hasta
+              <input id="hasta" type="date" />
+            </label>
+          </div>
+          <p class="note">Por defecto calcula el año completo. Cambia las fechas si entraste o saliste durante el año.</p>
+        </form>
+        <div class="result" aria-live="polite">
+          <span class="big-label">Total a recibir</span>
+          <span class="big" id="total">$0</span>
+          <dl class="lines">
+            <div><dt>Cesantías</dt><dd id="r-ces">$0</dd></div>
+            <div><dt>Intereses (12 %)</dt><dd id="r-int">$0</dd></div>
+            <div><dt>Salario + auxilio</dt><dd id="r-base">$0</dd></div>
+            <div><dt>Días trabajados</dt><dd id="r-dias">0</dd></div>
+          </dl>
+          <p class="note">Las cesantías se consignan en tu fondo antes del 14 de febrero. Los intereses te los pagan directamente antes del 31 de enero.</p>
+          <button class="share" id="share" type="button">Compartir resultado</button>
+        </div>
+      </div>
+
+      <article class="content narrow">
+        <section>
+          <h2>¿Cómo se calculan las cesantías?</h2>
+          <p>Las cesantías equivalen a un mes de salario por cada año trabajado, o la parte proporcional si trabajaste menos. Sobre ese valor, el empleador te paga un 12 % anual de intereses.</p>
+          <p class="formula">Cesantías = (salario + auxilio de transporte) × días trabajados ÷ 360</p>
+          <p class="formula">Intereses = cesantías × 12 % × días trabajados ÷ 360</p>
+        </section>
+        <section>
+          <h2>Fechas clave</h2>
+          <ul>
+            <li><strong>31 de enero:</strong> plazo para pagarte los intereses sobre cesantías.</li>
+            <li><strong>14 de febrero:</strong> plazo para consignar las cesantías en tu fondo.</li>
+            <li><strong>Al terminar el contrato:</strong> te las pagan directamente en la liquidación.</li>
+          </ul>
+        </section>
+        <section>
+          <h2>Preguntas frecuentes</h2>
+          <details><summary>¿Puedo retirar mis cesantías?</summary><p>Sí, en casos como compra o mejora de vivienda, pago de educación propia o de tu familia, o al terminar tu contrato. Cada fondo tiene su proceso.</p></details>
+          <details><summary>¿Qué pasa si no me consignan las cesantías a tiempo?</summary><p>El empleador puede tener que pagar una sanción por cada día de retraso. Consulta con un abogado laboral o con el Ministerio del Trabajo.</p></details>
+        </section>
+      </article>
+    </div>
+  </main>
+  <!--FOOTER-->
+  <script type="module" src="/src/cesantias.js"></script>
+</body>
+</html>

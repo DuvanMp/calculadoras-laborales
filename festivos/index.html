@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="es-CO">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Festivos en Colombia 2026 y 2027 | ¿Cuándo es el próximo festivo?</title>
+  <meta name="description" content="Calendario de festivos en Colombia 2026 y 2027, puentes festivos y cuenta regresiva al próximo festivo. Según la Ley Emiliani." />
+  <link rel="icon" href="/favicon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <!--HEADER-->
+  <main>
+    <section class="hero">
+      <div class="wrap">
+        <span class="pill">Calendario oficial</span>
+        <h1>Festivos en Colombia</h1>
+        <p>¿Cuándo es el próximo festivo? Mira cuántos días faltan y planea tus puentes del año.</p>
+      </div>
+    </section>
+
+    <div class="wrap">
+      <div class="tool">
+        <div class="result next" style="border:0" aria-live="polite">
+          <span class="big-label">Próximo festivo</span>
+          <div class="count"><span class="big" id="dias">–</span><span id="dias-label">días</span></div>
+          <p><strong id="prox-nombre">–</strong></p>
+          <p class="note" id="prox-fecha">–</p>
+          <button class="share" id="share" type="button">Compartir</button>
+        </div>
+        <form onsubmit="return false">
+          <h2>Puentes del año</h2>
+          <p class="note" id="puentes-resumen"></p>
+          <p class="note">Un puente es un fin de semana largo: festivo en lunes o viernes.</p>
+        </form>
+      </div>
+
+      <article class="content narrow">
+        <section>
+          <div class="year-tabs" role="group" aria-label="Año">
+            <button type="button" data-y="2026">2026</button>
+            <button type="button" data-y="2027">2027</button>
+          </div>
+          <h2 id="lista-titulo">Festivos 2026</h2>
+          <ul class="hol-list" id="lista"></ul>
+        </section>
+        <section>
+          <h2>¿Por qué los festivos se pasan al lunes?</h2>
+          <p>Por la Ley 51 de 1983, conocida como Ley Emiliani, varios festivos religiosos y patrios se trasladan al lunes siguiente para crear fines de semana largos. Otros, como el 1 de enero, el 1 de mayo, el 20 de julio, el 7 de agosto, el 8 y el 25 de diciembre, se celebran siempre en su fecha.</p>
+        </section>
+        <section>
+          <h2>Preguntas frecuentes</h2>
+          <details><summary>¿Cuántos festivos tiene Colombia?</summary><p>Hay 18 días festivos al año. Algunos años dos festivos caen el mismo lunes, como pasó en 2025 con el Sagrado Corazón y San Pedro y San Pablo.</p></details>
+          <details><summary>¿Si trabajo un festivo me lo pagan doble?</summary><p>El trabajo en dominical o festivo tiene un recargo sobre el valor de la hora ordinaria. El porcentaje depende de la ley vigente; consulta tu contrato o a tu empleador.</p></details>
+        </section>
+      </article>
+    </div>
+  </main>
+  <!--FOOTER-->
+  <script type="module" src="/src/festivos.js"></script>
+</body>
+</html>

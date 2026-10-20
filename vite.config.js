@@ -33,6 +33,18 @@ const footer = `
   <p>Hecho por <a href="https://duvan-martinez.vercel.app" target="_blank" rel="noopener">Duvan Martínez</a></p>
 </footer>`
 
+// Nombre del sitio para Google (en vez de "Vercel") y vista previa al compartir
+const SITE_NAME = 'Calculadoras Laborales'
+const seo = (page) => {
+  const og = `<meta property="og:site_name" content="${SITE_NAME}" />
+<meta property="og:type" content="website" />
+<meta property="og:locale" content="es_CO" />
+<meta property="og:url" content="${SITE_URL}${page.path}" />`
+  if (page.path !== '/') return og
+  const data = { '@context': 'https://schema.org', '@type': 'WebSite', name: SITE_NAME, alternateName: SITE, url: `${SITE_URL}/` }
+  return `${og}\n<script type="application/ld+json">${JSON.stringify(data)}</script>`
+}
+
 const analytics = `
 <script>window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };</script>
 <script defer src="/_vercel/insights/script.js"></script>`
@@ -51,7 +63,7 @@ export default defineConfig({
         return html
           .replace('<!--HEADER-->', header(page.path))
           .replace('<!--FOOTER-->', footer)
-          .replace('</head>', `<link rel="canonical" href="${SITE_URL}${page.path}" />\n${analytics}\n</head>`)
+          .replace('</head>', `<link rel="canonical" href="${SITE_URL}${page.path}" />\n${seo(page)}\n${analytics}\n</head>`)
       },
       closeBundle() {
         const today = new Date().toISOString().slice(0, 10)

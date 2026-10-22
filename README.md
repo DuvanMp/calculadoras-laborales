@@ -5,6 +5,7 @@ Sitio estático con herramientas gratuitas para trabajadores en Colombia:
 - `/salario-neto/` — salario neto mensual (salud, pensión, fondo de solidaridad, auxilio de transporte)
 - `/prima/` — prima de servicios por semestre
 - `/cesantias/` — cesantías e intereses del 12 %
+- `/liquidacion/` — liquidación de contrato (cesantías, intereses, prima, vacaciones e indemnización art. 64 CST)
 - `/festivos/` — próximo festivo, puentes y calendario (calculado con la Ley Emiliani, sirve para cualquier año)
 
 Cada herramienta es una página HTML independiente, con su propio título y descripción, lo que ayuda a que Google la encuentre.

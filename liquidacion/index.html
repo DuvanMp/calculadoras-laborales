@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="es-CO">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Calculadora de liquidación laboral 2026 Colombia | Renuncia y despido</title>
+  <meta name="description" content="Calcula tu liquidación de contrato en Colombia 2026: cesantías, intereses, prima, vacaciones e indemnización por despido sin justa causa. Para renuncia o despido." />
+  <link rel="icon" href="/favicon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <!--HEADER-->
+  <main>
+    <section class="hero">
+      <div class="wrap">
+        <span class="pill">Renuncia o despido</span>
+        <h1>Calculadora de liquidación laboral</h1>
+        <p>Calcula cuánto te deben pagar cuando termina tu contrato: cesantías, intereses, prima, vacaciones e indemnización si aplica.</p>
+      </div>
+    </section>
+
+    <div class="wrap">
+      <div class="tool">
+        <form onsubmit="return false">
+          <label class="field">Salario básico mensual
+            <input id="salario" inputmode="numeric" autocomplete="off" />
+          </label>
+          <div class="row">
+            <label class="field">Fecha de ingreso
+              <input id="ingreso" type="date" />
+            </label>
+            <label class="field">Fecha de retiro
+              <input id="retiro" type="date" />
+            </label>
+          </div>
+          <label class="field">¿Por qué termina el contrato?
+            <select id="motivo">
+              <option value="renuncia">Renuncié</option>
+              <option value="sin-justa-causa">Me despidieron sin justa causa</option>
+              <option value="justa-causa">Me despidieron con justa causa</option>
+              <option value="fin">Se terminó el plazo del contrato</option>
+            </select>
+          </label>
+          <div class="row">
+            <label class="field">Tipo de contrato
+              <select id="contrato">
+                <option value="indefinido">Término indefinido</option>
+                <option value="fijo">Término fijo</option>
+              </select>
+            </label>
+            <label class="field" id="fin-wrap" hidden>Fecha pactada de fin
+              <input id="fin-pactado" type="date" />
+            </label>
+          </div>
+          <label class="field">Días de vacaciones que ya tomaste
+            <input id="vac" type="number" inputmode="numeric" min="0" value="0" />
+            <small>Días hábiles disfrutados en todo el contrato. Si nunca saliste a vacaciones, deja 0.</small>
+          </label>
+          <label class="check"><input id="incluir-salario" type="checkbox" checked /> Incluir el salario de los días trabajados en el último mes</label>
+        </form>
+        <div class="result" aria-live="polite">
+          <span class="big-label">Tu liquidación</span>
+          <span class="big" id="total">$0</span>
+          <dl class="lines">
+            <div id="l-salario"><dt>Salario último mes <small id="d-salario"></small></dt><dd id="r-salario">$0</dd></div>
+            <div><dt>Cesantías <small id="d-ces"></small></dt><dd id="r-ces">$0</dd></div>
+            <div><dt>Intereses de cesantías</dt><dd id="r-int">$0</dd></div>
+            <div><dt>Prima <small id="d-prima"></small></dt><dd id="r-prima">$0</dd></div>
+            <div><dt>Vacaciones <small id="d-vac"></small></dt><dd id="r-vac">$0</dd></div>
+            <div id="l-ind"><dt>Indemnización <small id="d-ind"></small></dt><dd id="r-ind">$0</dd></div>
+          </dl>
+          <p class="note" id="r-nota"></p>
+          <button class="share" id="share" type="button">Compartir resultado</button>
+        </div>
+      </div>
+
+      <article class="content narrow">
+        <section>
+          <h2>¿Qué incluye la liquidación?</h2>
+          <p>Cuando termina un contrato de trabajo, por renuncia o por despido, el empleador debe pagarte las prestaciones que se han acumulado y no te han pagado todavía:</p>
+          <ul>
+            <li><strong>Cesantías</strong> del año en curso.</li>
+            <li><strong>Intereses sobre cesantías</strong> del 12 % anual.</li>
+            <li><strong>Prima de servicios</strong> del semestre en curso.</li>
+            <li><strong>Vacaciones</strong> que no alcanzaste a disfrutar.</li>
+            <li><strong>Salario</strong> de los días trabajados que no te han pagado.</li>
+            <li><strong>Indemnización</strong>, solo si te despidieron sin justa causa.</li>
+          </ul>
+        </section>
+        <section>
+          <h2>Fórmulas</h2>
+          <p class="formula">Cesantías = (salario + auxilio) × días trabajados en el año ÷ 360</p>
+          <p class="formula">Intereses = cesantías × 12 % × días ÷ 360</p>
+          <p class="formula">Prima = (salario + auxilio) × días trabajados en el semestre ÷ 360</p>
+          <p class="formula">Vacaciones = salario × días trabajados ÷ 720</p>
+          <p>El auxilio de transporte se incluye en cesantías y prima si ganas hasta dos salarios mínimos, pero no en las vacaciones.</p>
+        </section>
+        <section>
+          <h2>Indemnización por despido sin justa causa</h2>
+          <p>Según el artículo 64 del Código Sustantivo del Trabajo:</p>
+          <ul>
+            <li><strong>Contrato indefinido, salario menor a 10 mínimos:</strong> 30 días de salario por el primer año y 20 días por cada año adicional, proporcional a la fracción.</li>
+            <li><strong>Contrato indefinido, 10 mínimos o más:</strong> 20 días por el primer año y 15 días por cada año adicional.</li>
+            <li><strong>Contrato a término fijo:</strong> los salarios del tiempo que faltaba para terminar el contrato.</li>
+          </ul>
+          <p>Si renuncias, te despiden con justa causa o se termina el plazo del contrato, no hay indemnización, pero sí te deben pagar las demás prestaciones.</p>
+        </section>
+        <section>
+          <h2>Preguntas frecuentes</h2>
+          <details><summary>¿Si renuncio me pagan liquidación?</summary><p>Sí. Renunciar no te hace perder las cesantías, los intereses, la prima ni las vacaciones pendientes. Lo único que no recibes es la indemnización.</p></details>
+          <details><summary>¿Cuánto tiempo tiene la empresa para pagarme la liquidación?</summary><p>Debe pagarla al terminar el contrato. Si se demora sin razón, el artículo 65 del Código Sustantivo del Trabajo establece una sanción de un día de salario por cada día de retraso.</p></details>
+          <details><summary>¿Las cesantías de años anteriores entran en la liquidación?</summary><p>No. Las cesantías de años anteriores ya debieron consignarse en tu fondo antes del 14 de febrero. Esas las retiras directamente del fondo con la carta de terminación del contrato.</p></details>
+          <details><summary>¿Qué pasa si tengo salario integral?</summary><p>El salario integral ya incluye las prestaciones sociales, así que no se pagan cesantías, intereses ni prima. Esta calculadora no aplica para ese caso; sí te corresponden vacaciones e indemnización si aplica.</p></details>
+        </section>
+      </article>
+    </div>
+  </main>
+  <!--FOOTER-->
+  <script type="module" src="/src/liquidacion.js"></script>
+</body>
+</html>

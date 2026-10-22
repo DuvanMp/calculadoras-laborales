@@ -10,6 +10,7 @@ const PAGES = [
   { path: '/salario-neto/', file: 'salario-neto/index.html', label: 'Salario neto' },
   { path: '/prima/', file: 'prima/index.html', label: 'Prima' },
   { path: '/cesantias/', file: 'cesantias/index.html', label: 'Cesantías' },
+  { path: '/liquidacion/', file: 'liquidacion/index.html', label: 'Liquidación' },
 ]
 
 // Dominio público: en Vercel se toma solo; con dominio propio, cámbialo aquí.

@@ -38,3 +38,33 @@ assert.equal(c.cesantias, 2000000)
 assert.equal(c.intereses, 240000)
 
 console.log('✓ Todas las pruebas pasaron')
+
+// ── Liquidación ──
+{
+  const { liquidacion, indemnizacion } = await import('./calculos.js')
+  // Indefinido, 3 años y 6 meses, $3.000.000 → 80 días = $8.000.000 (ejemplo conocido)
+  const i = indemnizacion({ salario: 3000000, ingreso: '2022-01-01', retiro: '2025-06-30', contrato: 'indefinido' }, v)
+  assert.equal(i.dias, 80)
+  assert.equal(i.valor, 8000000)
+  // Menos de un año: 30 días completos
+  assert.equal(indemnizacion({ salario: 3000000, ingreso: '2026-03-01', retiro: '2026-08-31', contrato: 'indefinido' }, v).dias, 30)
+  // 10 SMMLV o más: 20 + 15
+  assert.equal(indemnizacion({ salario: 10 * v.smmlv, ingreso: '2024-01-01', retiro: '2025-12-30', contrato: 'indefinido' }, v).dias, 35)
+  // Fijo: días que faltaban (1 oct a 31 dic = 90)
+  assert.equal(indemnizacion({ salario: 3000000, ingreso: '2026-01-01', retiro: '2026-09-30', contrato: 'fijo', finPactado: '2026-12-31' }, v).dias, 90)
+
+  // Renuncia con mínimo, 1 ene a 30 jun 2026, sin vacaciones disfrutadas
+  const L = liquidacion({ salario: v.smmlv, ingreso: '2026-01-01', retiro: '2026-06-30', motivo: 'renuncia' }, v)
+  assert.equal(L.partes.salario, 2000000)          // mes completo con auxilio
+  assert.equal(L.partes.cesantias, 1000000)        // 180 días
+  assert.equal(L.partes.intereses, 60000)          // 12 % × 180/360
+  assert.equal(L.partes.prima, 1000000)            // semestre completo
+  assert.equal(L.partes.vacaciones, Math.round(v.smmlv / 30 * 7.5))
+  assert.equal(L.partes.indemnizacion, 0)
+  // Retiro en segundo semestre: prima solo desde el 1 de julio
+  const L2 = liquidacion({ salario: v.smmlv, ingreso: '2025-03-10', retiro: '2026-08-15', motivo: 'renuncia' }, v)
+  assert.equal(L2.dias.prima, 45)
+  assert.equal(L2.dias.cesantias, 225)
+  assert.equal(L2.dias.mes, 15)
+  console.log('✓ Liquidación')
+}

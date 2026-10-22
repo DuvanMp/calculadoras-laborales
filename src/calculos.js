@@ -110,3 +110,69 @@ export function cesantias(salario, dias, { smmlv, auxilio }) {
 
 export const pesos = (n) =>
   new Intl.NumberFormat('es-CO', { style: 'currency', currency: 'COP', maximumFractionDigits: 0 }).format(n)
+
+// ── Liquidación de contrato ───────────────────────────────────
+const isoMas1 = (iso) => new Date(Date.parse(`${iso}T00:00:00Z`) + 86400000).toISOString().slice(0, 10)
+const mayor = (a, b) => (a > b ? a : b)
+
+// Indemnización por despido sin justa causa (art. 64 CST)
+// Indefinido: < 10 SMMLV → 30 días el primer año + 20 por cada año adicional (proporcional)
+//             ≥ 10 SMMLV → 20 días el primer año + 15 por cada año adicional (proporcional)
+// Fijo: salarios del tiempo que faltaba para terminar el contrato.
+export function indemnizacion({ salario, ingreso, retiro, contrato, finPactado }, { smmlv }) {
+  const diario = salario / 30
+  if (contrato === 'fijo') {
+    const faltan = finPactado && finPactado > retiro ? dias360(isoMas1(retiro), finPactado) : 0
+    return { dias: faltan, valor: Math.round(diario * faltan) }
+  }
+  const anios = dias360(ingreso, retiro) / 360
+  const [primero, siguientes] = salario < 10 * smmlv ? [30, 20] : [20, 15]
+  const dias = anios <= 1 ? primero : primero + siguientes * (anios - 1)
+  return { dias: Math.round(dias * 100) / 100, valor: Math.round(diario * dias) }
+}
+
+// Liquidación completa al terminar el contrato.
+// Supone que ya te pagaron las primas de semestres anteriores y que las
+// cesantías de años anteriores ya están en el fondo.
+export function liquidacion(p, valores) {
+  const { salario, ingreso, retiro, motivo, vacDisfrutadas = 0, incluirSalario = true } = p
+  const { smmlv, auxilio } = valores
+  const aux = salario <= 2 * smmlv ? auxilio : 0
+  const base = salario + aux
+  const [y, m] = retiro.split('-').map(Number)
+
+  // Salario de los días trabajados en el último mes
+  const diasMes = dias360(mayor(ingreso, `${retiro.slice(0, 7)}-01`), retiro)
+  const salarioPend = incluirSalario ? Math.round((base * diasMes) / 30) : 0
+
+  // Cesantías e intereses del año en curso
+  const diasCes = dias360(mayor(ingreso, `${y}-01-01`), retiro)
+  const ces = (base * diasCes) / 360
+  const intCes = (ces * 0.12 * diasCes) / 360
+
+  // Prima del semestre en curso
+  const inicioSem = m <= 6 ? `${y}-01-01` : `${y}-07-01`
+  const diasPrima = dias360(mayor(ingreso, inicioSem), retiro)
+  const primaV = (base * diasPrima) / 360
+
+  // Vacaciones no disfrutadas: 15 días hábiles por año trabajado (sin auxilio)
+  const diasTotales = dias360(ingreso, retiro)
+  const vacPend = Math.max(0, (diasTotales * 15) / 360 - vacDisfrutadas)
+  const vac = (salario / 30) * vacPend
+
+  const ind = motivo === 'sin-justa-causa' ? indemnizacion(p, valores) : { dias: 0, valor: 0 }
+
+  const partes = {
+    salario: salarioPend,
+    cesantias: Math.round(ces),
+    intereses: Math.round(intCes),
+    prima: Math.round(primaV),
+    vacaciones: Math.round(vac),
+    indemnizacion: ind.valor,
+  }
+  const total = Object.values(partes).reduce((a, b) => a + b, 0)
+  return {
+    aux, base, partes, total,
+    dias: { mes: incluirSalario ? diasMes : 0, cesantias: diasCes, prima: diasPrima, totales: diasTotales, vacaciones: Math.round(vacPend * 100) / 100, indemnizacion: ind.dias },
+  }
+}

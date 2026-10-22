@@ -13,6 +13,7 @@
   --font: 'Manrope', system-ui, sans-serif;
 }
 * { box-sizing: border-box; }
+[hidden] { display: none !important; }
 html { -webkit-text-size-adjust: 100%; }
 body { margin: 0; background: var(--bg); color: var(--ink); font: 400 1.0625rem/1.6 var(--font); -webkit-font-smoothing: antialiased; }
 a { color: inherit; }
@@ -43,14 +44,20 @@ p { margin: 0; }
 .pill { display: inline-block; font-size: .8125rem; font-weight: 700; color: var(--accent-ink); background: var(--accent); padding: 4px 12px; border-radius: 999px; margin-bottom: 14px; }
 
 /* Tarjeta de cálculo */
-.tool { background: var(--surface); border-radius: var(--radius); box-shadow: 0 20px 40px -24px rgba(18, 35, 61, .35); margin-top: -56px; position: relative; display: grid; grid-template-columns: 1fr 1fr; overflow: hidden; }
+.tool { background: var(--surface); border-radius: var(--radius); box-shadow: 0 20px 40px -24px rgba(18, 35, 61, .35); margin-top: -56px; position: relative; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); overflow: hidden; }
 .tool form { padding: 28px; display: grid; gap: 18px; align-content: start; }
 .result { background: #FFF8DF; padding: 28px; display: grid; gap: 14px; align-content: start; border-left: 1px solid #F3E3A8; }
 .field { display: grid; gap: 6px; font-weight: 600; font-size: .9375rem; }
 .field small { font-weight: 400; color: var(--muted); }
 .field input, .field select { font: inherit; font-size: 1.125rem; font-weight: 600; color: var(--ink); background: var(--bg); border: 1.5px solid var(--line); border-radius: 12px; padding: 12px 14px; width: 100%; }
+.check { display: flex; gap: 10px; align-items: flex-start; font-size: .9375rem; font-weight: 600; cursor: pointer; }
+.check input { width: 18px; height: 18px; margin: 2px 0 0; accent-color: var(--ink); flex: none; }
+.lines dt small { font-weight: 400; font-size: .8125rem; }
 .field input:focus, .field select:focus { outline: none; border-color: var(--ink); background: #fff; }
-.row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.row { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 12px; }
+.field, .field input, .field select { min-width: 0; }
+.row:has(> [hidden]) { grid-template-columns: minmax(0, 1fr); }
+.field input[type='date'] { padding-inline: 12px; font-size: 1rem; }
 .quick { display: flex; flex-wrap: wrap; gap: 6px; }
 .quick button { font: inherit; font-size: .8125rem; font-weight: 600; border: 1px solid var(--line); background: #fff; border-radius: 999px; padding: 5px 12px; cursor: pointer; color: var(--ink-2); }
 .quick button:hover { border-color: var(--ink); }
@@ -93,6 +100,7 @@ details p { padding-bottom: 14px; }
 /* Inicio */
 .cards { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin-top: -56px; position: relative; }
 .card { display: grid; gap: 8px; background: var(--surface); border-radius: var(--radius); padding: 24px; text-decoration: none; box-shadow: 0 20px 40px -28px rgba(18, 35, 61, .4); border: 1px solid transparent; transition: border-color .15s, transform .15s; }
+.cards .card:last-child:nth-child(odd) { grid-column: 1 / -1; }
 .card:hover { border-color: var(--ink); transform: translateY(-2px); }
 .card p { color: var(--muted); font-size: .9375rem; }
 .card .go { font-weight: 700; font-size: .9375rem; text-decoration: underline; text-underline-offset: 4px; text-decoration-color: var(--accent); text-decoration-thickness: 2px; }
@@ -103,7 +111,7 @@ details p { padding-bottom: 14px; }
 .foot a { color: var(--ink); }
 
 @media (max-width: 760px) {
-  .tool { grid-template-columns: 1fr; }
+  .tool { grid-template-columns: minmax(0, 1fr); }
   .result { border-left: 0; border-top: 1px solid #F3E3A8; }
   .tool form, .result { padding: 22px; }
   .cards { grid-template-columns: 1fr; }
